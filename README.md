@@ -32,9 +32,11 @@
 ## Shopware 6 Basics
   
 ### Repositories
-  - $criteria = new Criteria();
-  - $criteria->addFilter(new EqualsAnyFilter('<DATA>', [<DATA_ARRAY>]));
-  - $criteria->addAssociation('field');
-  - $criteria->addAssociation('field.attribute');
-  - /** @var Entity $entity */
-  - $entity = EntityRepositoryInterface $repository->search($criteria, $this->context);
+```php
+  $criteria = new Criteria();
+  $criteria->addFilter(new EqualsAnyFilter('<DATA>', [<DATA_ARRAY>]));
+  $criteria->addAssociation('field');
+  $criteria->addAssociation('field.attribute');
+  /** @var Entity $entity */
+  $entity = EntityRepositoryInterface $repository->search($criteria, $this->context);
+```
