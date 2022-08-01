@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+
+    shopware:
+        image: dockware/dev:latest
+        container_name: SW6_NAME
+        ports:
+            - "80:80"
+        volumes:
+            - "./src/custom/plugins:/var/www/html/custom/plugins"
+        networks:
+            - web
+
+networks:
+    web:
+        external: false
