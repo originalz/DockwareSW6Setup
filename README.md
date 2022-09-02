@@ -40,3 +40,62 @@
   /** @var Entity $entity */
   $entity = EntityRepositoryInterface $repository->search($criteria, $this->context);
 ```
+
+### Setup Custom Fields
+```php
+  public function install(InstallContext $installContext): void
+	{
+		/** @var EntityRepository $customFieldSetRepository */
+		$customFieldSetRepository = $this->container->get('custom_field_set.repository');
+
+		$customFieldSetRepository->upsert([
+			[
+				'name' => '<prefix_custom_field_set>',
+				'config' => [
+					'label' => [
+						'de-DE' => '<LABEL>',
+						'en-GB' => '<LABEL>'
+					]
+				],
+				'customFields' => [
+					[
+						'name' => '<prefix_customfield_name>',
+						'type' => CustomFieldTypes::<TYPE>,
+						'config' => [
+							'label' => [
+								'de-DE' => '<LABEL>',
+								'en-GB' => '<LABEL>'
+							],
+							'type' => '<TYPE>',
+							'customFieldType' => '<TYPE>',
+							'customFieldPosition' => 1
+						]
+					]
+				],
+				'relations' => [
+					[
+						'id' => Uuid::randomHex(),
+						'entityName' => '<ENTITY_NAME>'
+					]
+				]
+			]
+		], $installContext->getContext());
+	}
+```
+
+```php
+  public function uninstall(UninstallContext $uninstallContext): void
+	{
+		$connection = $this->container->get(Connection::class);
+
+		$connection->executeUpdate('
+			DELETE FROM `custom_field_set`
+			WHERE name LIKE \'<prefix_custom_field_set>\'
+		');
+
+		$connection->executeUpdate('
+			DELETE FROM `custom_field`
+			WHERE name LIKE \'<prefix_customfield_name>\'
+		');
+	}
+```
