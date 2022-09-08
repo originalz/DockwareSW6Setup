@@ -1,3 +1,4 @@
+
 ## Dockware Installation
 
 ### Basic Setup
@@ -121,5 +122,16 @@ public function setCustomField(string $param): void
 			'customFields' => ['<prefix_customfield_name>' => '<data>']  
 		]
 	], $this->context);  
+}
+```
+
+### Setup Page Subscription
+
+```php
+public static function getSubscribedEvents(): array  
+{  
+	return [  
+		<...Page>LoadedEvent::class => 'on<...>Page'  
+	];  
 }
 ```
