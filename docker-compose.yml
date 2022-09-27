@@ -3,12 +3,15 @@ version: "3"
 services:
 
     shopware:
-        image: dockware/dev:latest
-        container_name: SW6_NAME
+        image: dockware/dev:<VERSION/latest>
+        environment:
+            - PHP_VERSION=<VERSION>
+        container_name: SW6_<NAME>
         ports:
             - "80:80"
+            - "22:22"
         volumes:
-            - "./src/custom/plugins:/var/www/html/custom/plugins"
+            - "<LOCAL_PATH>:<DOCKER_PATH>"
         networks:
             - web
 
