@@ -1,36 +1,36 @@
+# Dockware Shopware 6 Environment
 
+## Basic Setup
+The basic setup gives you a bind mounted shopware 6 installation with custom dockware image, shopware version & PHP version. If you need different versions for your project, just change it in the `docker-compose.yml` and run the `docker compose up...` command
 
-## Dockware Installation
+ 1. Create a new directory for your project on your machine.
+ 2. Create a docker-compose.yml file for your Dockware setup to define a docker container.
+ 3. Execute `docker compose up -d` to run the container.
+ 4. Execute `docker exec -it <CONTAINERNAME> bash` to get access to the docker container
+ 5. Execute `sudo chown www-data:www-data /var/www/html -R` to fix rights on the machine
 
-### Basic Setup
-  - Create new project dir and docker-compose.yml with dockware/dev:[VERSION] image -> WSL
-  - Execute docker compose up -d -> WSL
+## Docker Compose File
+    version: "3"
+    
+    services:
+    
+	    shopware:
+		    image: dockware/dev:latest # Choose Dockware Image and SW Version
+		    environment:
+			    - PHP_VERSION=8.0 # Choose PHP Version
+		    container_name: SW6_NAME # Choose container name
+		    ports:
+				- "80:80"
+			    - "22:22"
+		    volumes:
+			    - "./shop/custom/plugins:/var/www/html/custom/plugins" # Setup volume for mounting
+		    networks:
+			    - web
 
-### Directory Setup
-  - /src/custom/plugins/[PLUGINS_FOR_DEV] -> WSL
-  - /var/www/html/custom/plugins/[PLUGINS_FOR_DEV] -> DOCKER
-  - /var/www/html/.env -> DOCKER
+    networks:
+	    web:
+		    external: false
 
-### Bind Mounting
- - docker compose stop -> WSL
- - Add volumes to docker-compose.yml -> WSL
- - chgrp -R 33 ./src -> WSL
- - chmod a+w ./src/var/* -> WSL
- - docker compose up -d -> WSL
- - sudo chown www-data:www-data /var/www/html -R -> DOCKER
- - Test if data is synced between docker and WSL project files
- - move to project dir and execute pst ps to start PHPStorm with the WSL dir -> WSL
-  
-### Fix very rare [Dockware Error](https://docs.dockware.io/faq/mysql-failed) 
- - docker rm -f [CONTAINERNAME] -> WSL
+## Fix very rare MySQL error
 
-## Docker
-
-### Handy Docker commands
-  - docker exec [-it] [CONTAINER_NAME] bash -> get acces to the docker machine
-  - docker compose up [-d] -> start docker machine
-  - docker compose stop -> stop docker machine
-  - docker compose down -> delete docker machine
-  - docker ps [-a] -> show all available docker machines
-
-
+ - [MySQL failed on startup](https://docs.dockware.io/faq/mysql-failed)
