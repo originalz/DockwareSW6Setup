@@ -34,3 +34,8 @@ The basic setup gives you a bind mounted shopware 6 installation with custom doc
 ## Fix very rare MySQL error
 
  - [MySQL failed on startup](https://docs.dockware.io/faq/mysql-failed)
+ 
+## PHPStorm Utility
+
+ - PHPStormTools PHPStorm Path: "C:\Users\keanu.klenner\AppData\Roaming\PHPStormTools"
+ - ZSH PHPStormTools Alias for pst "~/.zshrc"
