@@ -1,3 +1,4 @@
+
 # Dockware Shopware 6 Environment
 
 ## Basic Setup
@@ -39,3 +40,7 @@ The basic setup gives you a bind mounted shopware 6 installation with custom doc
 
  - PHPStormTools PHPStorm Path: "C:\Users\keanu.klenner\AppData\Roaming\PHPStormTools"
  - ZSH PHPStormTools Alias for pst "~/.zshrc"
+
+## Console Command PHP alias
+
+ - Plesk: /opt/plesk/php/7.4/bin/php -d memory_limit=-1 bin/console
